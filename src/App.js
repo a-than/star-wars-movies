@@ -1,8 +1,14 @@
 import React, { Component} from 'react';
 import axios from 'axios';
 import  {episodeNameById} from './EpisodeName.js';
+import MoviesTable from './MoviesTable';
 
 class App extends Component {
+    constructor() {
+        super();
+        this.handleClick = this.handleClick.bind(this);
+    }
+
     state = {
         data: [],
         filteredData: [],
@@ -129,17 +135,7 @@ class App extends Component {
                 </section>
                 <section className="main">
                     <div className="movies">
-                        <table >
-                            {this.state.filteredData.map((film, index) => {
-                                return (
-                                    <tr key={index} data-id={index} onClick={this.handleClick}>
-                                        <td className="small-text">{film.name}</td>
-                                        <td>{film.fields.title}</td>
-                                        <td className="td-right">{film.fields.release_date}</td>
-                                    </tr>
-                                )
-                            })}
-                        </table>
+                        <MoviesTable data = {this.state.filteredData} handleClick = {this.handleClick} />
                     </div>
                     <div className="details">
                         {
