@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import axios from 'axios';
 import  {episodeNameById} from './EpisodeName.js';
 import MoviesTable from './MoviesTable';
+import MovieDetails from './MovieDetails';
 
 class App extends Component {
     constructor() {
@@ -138,17 +139,7 @@ class App extends Component {
                         <MoviesTable data = {this.state.filteredData} handleClick = {this.handleClick} />
                     </div>
                     <div className="details">
-                        {
-                            this.state.isMovieSelected ? (
-                                <div className="movie-selected">
-                                    <h1>{this.state.selected.fields.title}</h1>
-                                    <p>{this.state.selected.fields.opening_crawl}</p>
-                                    <div>Directed by: {this.state.selected.fields.director}</div>
-                                </div>
-                            ) : (
-                                <div className="details-initial">{this.state.description}</div>
-                            )
-                        }
+                        <MovieDetails isMovieSelected = {this.state.isMovieSelected} selected = {this.state.selected} description = {this.state.description}/>
                     </div>
                 </section>
             </div>
