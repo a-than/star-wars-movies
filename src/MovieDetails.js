@@ -3,7 +3,6 @@ import React, { Component} from 'react';
 class MovieDetails extends Component {
     render() {
         return (
-
                 this.props.isMovieSelected ? (
                 <div className="movie-selected">
                     <h1>{this.props.selected.fields.title}</h1>

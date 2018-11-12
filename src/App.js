@@ -3,11 +3,15 @@ import axios from 'axios';
 import  {episodeNameById} from './EpisodeName.js';
 import MoviesTable from './MoviesTable';
 import MovieDetails from './MovieDetails';
+import Dropdown from './Dropdown';
 
 class App extends Component {
     constructor() {
         super();
         this.handleClick = this.handleClick.bind(this);
+        this.sortByEpisode = this.sortByEpisode.bind(this);
+        this.sortByDate = this.sortByDate.bind(this);
+        this.closeSort = this.closeSort.bind(this);
     }
 
     state = {
@@ -103,22 +107,12 @@ class App extends Component {
             <div className="container">
                 <section className="search-sort">
                     <button onClick={this.showSort}>Sort by...</button>
-                    {
-                        this.state.showSort ? (
-                            <div className="dropdown">
-                                <div className="sort-header">
-                                    <p>Sort by</p>
-                                    <span className="close-icon"><i id="close" className="fa fa-times fa-lg" onClick={this.closeSort}></i></span>
-                                </div>
-                                <ul >
-                                    <li onClick={this.sortByEpisode}>Episode</li>
-                                    <li onClick={this.sortByDate}>Year</li>
-                                </ul>
-                            </div>
-                        ) : (
-                            null
-                        )
-                    }
+                    <Dropdown
+                        showSort = {this.state.showSort}
+                        sortByEpisode = {this.sortByEpisode}
+                        sortByDate = {this.sortByDate}
+                        closeSort = {this.closeSort}
+                    />
 
 
                     <div className="search-box">
