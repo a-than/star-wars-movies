@@ -4,6 +4,7 @@ import  {episodeNameById} from './EpisodeName.js';
 import MoviesTable from './MoviesTable';
 import MovieDetails from './MovieDetails';
 import Dropdown from './Dropdown';
+import SearchBar from "./SearchBar";
 
 class App extends Component {
     constructor() {
@@ -39,7 +40,7 @@ class App extends Component {
             });
     }
 
-    onSearchChange(term) {
+    onSearchChange = (term => {
         const searchResults = this.state.data.filter(film => {
             let filmNameToLower = film.fields.title.toLowerCase();
             if(filmNameToLower.includes(term.toLowerCase())) {
@@ -51,7 +52,7 @@ class App extends Component {
             term: term,
             filteredData: searchResults
         });
-    }
+    })
 
     handleClick = ( e  => {
       const desc = e.currentTarget.getAttribute('data-id');
@@ -116,16 +117,9 @@ class App extends Component {
 
 
                     <div className="search-box">
-                        <div className="search-container">
-                            <span className="icon"><i className="fa fa-search"></i></span>
-                            <input
-                                type="search"
-                                id="search"
-                                placeholder="Type to search..."
-                                value={this.state.term}
-                                onChange={e => this.onSearchChange(e.target.value)}
-                            />
-                        </div>
+                        <SearchBar
+                            onSearchChange = {(term) => this.onSearchChange(term)}
+                        />
                     </div>
                 </section>
                 <section className="main">
