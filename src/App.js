@@ -13,6 +13,7 @@ class App extends Component {
         this.sortByEpisode = this.sortByEpisode.bind(this);
         this.sortByDate = this.sortByDate.bind(this);
         this.closeSort = this.closeSort.bind(this);
+        this.showSort = this.showSort.bind(this);
     }
 
     state = {
@@ -52,7 +53,7 @@ class App extends Component {
             term: term,
             filteredData: searchResults
         });
-    })
+    });
 
     handleClick = ( e  => {
       const desc = e.currentTarget.getAttribute('data-id');
@@ -69,6 +70,7 @@ class App extends Component {
            showSort: !prevState.showSort
        }));
     });
+
 
     closeSort = (e => {
         e.preventDefault();
@@ -107,12 +109,10 @@ class App extends Component {
         return (
             <div className="container">
                 <section className="search-sort">
-                    <button onClick={this.showSort}>Sort by...</button>
+                    {/*<button onClick={this.showSort}>Sort by...</button>*/}
                     <Dropdown
-                        showSort = {this.state.showSort}
                         sortByEpisode = {this.sortByEpisode}
                         sortByDate = {this.sortByDate}
-                        closeSort = {this.closeSort}
                     />
 
 
