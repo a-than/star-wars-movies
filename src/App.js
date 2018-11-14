@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import axios from 'axios';
-import  {episodeNameById} from './EpisodeName.js';
+import {episodeNameById} from './EpisodeName.js';
 import MoviesTable from './MoviesTable';
 import MovieDetails from './MovieDetails';
 import Dropdown from './Dropdown';
@@ -12,8 +12,6 @@ class App extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.sortByEpisode = this.sortByEpisode.bind(this);
         this.sortByDate = this.sortByDate.bind(this);
-        this.closeSort = this.closeSort.bind(this);
-        this.showSort = this.showSort.bind(this);
     }
 
     state = {
@@ -22,8 +20,7 @@ class App extends Component {
         selected: [],
         isMovieSelected: false,
         description: 'No movie selected',
-        term: '',
-        showSort: false
+        term: ''
     };
 
     componentDidMount() {
@@ -64,21 +61,6 @@ class App extends Component {
       });
     });
 
-    showSort = (e => {
-       e.preventDefault();
-       this.setState(prevState => ({
-           showSort: !prevState.showSort
-       }));
-    });
-
-
-    closeSort = (e => {
-        e.preventDefault();
-        this.setState({
-            showSort: false
-        });
-    });
-
     sortByEpisode = (e => {
         e.preventDefault();
         this.setState({
@@ -109,7 +91,6 @@ class App extends Component {
         return (
             <div className="container">
                 <section className="search-sort">
-                    {/*<button onClick={this.showSort}>Sort by...</button>*/}
                     <Dropdown
                         sortByEpisode = {this.sortByEpisode}
                         sortByDate = {this.sortByDate}

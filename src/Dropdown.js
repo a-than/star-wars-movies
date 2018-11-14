@@ -12,14 +12,14 @@ class Dropdown extends Component {
         this.closeSort = this.closeSort.bind(this);
     }
 
-    showSort(e) {
-        e.preventDefault();
+    showSort =(() => {
+        const nextShow = !this.state.showSort;
         this.setState({
-            showSort: true
+            showSort: nextShow
         }, () => {
             document.addEventListener('click',this.closeSort);
         });
-    }
+    });
 
     closeSort(e) {
         if(this.dropdownMenu && !this.dropdownMenu.contains(e.target)) {
@@ -31,27 +31,19 @@ class Dropdown extends Component {
         }
     }
 
-    forceClose = (e => {
-       e.preventDefault();
-        this.setState({
-          showSort: false
-       });
-    });
-
-
     render() {
         return (
-            <div>
+            <div ref={(element) => {
+                this.dropdownMenu = element;
+            }}>
                 <button onClick={this.showSort}>Sort by...</button>
                 {
                     this.state.showSort ? (
-                        <div className="dropdown" ref={(element) => {
-                            this.dropdownMenu = element;
-                        }}>
+                        <div className="dropdown" >
                             <div className="sort-header">
                                 <p>Sort by</p>
                                 <span className="close-icon"><i id="close" className="fa fa-times fa-lg"
-                                                                onClick={this.forceClose}></i></span>
+                                                                onClick={this.showSort}></i></span>
                             </div>
                             <ul>
                                 <li onClick={this.props.sortByEpisode}>Episode</li>
